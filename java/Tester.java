@@ -1,3 +1,4 @@
+package java;
 public class Tester {
     public static void main(String[] args){
         ClueComputer.startTable(ClueComputer.getCardNumbers(), 7);
