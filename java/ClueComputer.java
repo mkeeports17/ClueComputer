@@ -1,11 +1,11 @@
-package java;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-import javax.swing.JFrame;
-import javax.swing.JTable;
+// import javax.swing.JFrame;
+// import javax.swing.JTable;
 
 public class ClueComputer {
     private static int players = 6;
@@ -14,29 +14,12 @@ public class ClueComputer {
     private static char[][] table;
     private static Guess currentGuess;
     private static final ArrayList<String> suspectList = new ArrayList<String>(Arrays.asList("Mustard", "Plum", "Green", "Peacock", "Scarlett", "White"));
-    private static final ArrayList<String> weaponList = new ArrayList<String>(Arrays.asList("Wrench", "Candlestick", "Dagger", "Revolver", "Leadpipe", "Rope"));
-    private static final ArrayList<String> roomList = new ArrayList<String>(Arrays.asList("Ball", "Billiard", "Conservatory", "Dining", "Hall", "Kitchen", "Library", "Lounge", "Study"));
+    private static final ArrayList<String> weaponList = new ArrayList<String>(Arrays.asList("Wrench", "Candlestick", "Dagger", "Pistol", "Leadpipe", "Rope"));
+    private static final ArrayList<String> roomList = new ArrayList<String>(Arrays.asList("Bath", "Dining", "Living", "Bed", "Garage", "Office", "Courtyard", "Game", "Kitchen"));
     private static final ArrayList<String> fullList = newFullList();
 
     public static void main(String[] args){
         run();
-        //GUIManager.run();
-        //run();
-        // JFrame frame = new JFrame();
-        // String[] columnNames = {"Name", "Age", "Student"};
-        // String[][] data = {
-        //     {"Ken", "5", "false"},
-        //     {"Bob", "6", "true"},
-        //     {"Joe", "7", "false"},
-        //     {"Mike", "8", "true"},
-        //     {"Bill", "9", "false"}
-        // };
-        // JTable table = new JTable(data, columnNames);
-        // frame.add(table);
-        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // frame.setSize(400,400);
-        // frame.setLocationRelativeTo(null);  
-        // frame.setVisible(true);
     }
 
     public static void run() {
@@ -223,15 +206,18 @@ public class ClueComputer {
     public static void startTable(int rows, int cols){
         table = new char[rows][cols];
         for(int i = 0;i<table.length;i++){
-            if(i != 1){
-                for(int j=0;j<table[i].length;j++){
-                    table[i][j] = '-';
-                }
-            } else {
-                for(int j=0;j<table[i].length;j++){
-                    table[i][j] = 'X';
-                }
-            } 
+            for(int j=0;j<table[i].length;j++){
+                table[i][j] = '-';
+            }
+            // if(i != 1){
+            //     for(int j=0;j<table[i].length;j++){
+            //         table[i][j] = '-';
+            //     }
+            // } else {
+            //     for(int j=0;j<table[i].length;j++){
+            //         table[i][j] = 'X';
+            //     }
+            // } 
         }
     }
     public static ArrayList<String> newFullList(){

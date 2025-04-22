@@ -1,4 +1,4 @@
-package java;
+
 public class Guess {
     public String suspect;
     public String room;

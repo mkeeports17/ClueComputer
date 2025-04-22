@@ -1,4 +1,4 @@
-package java;
+//package java;
 public class Tester {
     public static void main(String[] args){
         ClueComputer.startTable(ClueComputer.getCardNumbers(), 7);
@@ -23,7 +23,7 @@ public class Tester {
     }
     public static void testGuessElims(){
         ClueComputer.setCurrentGuess("Green", "Dagger", "Dining");
-        ClueComputer.setCurrentPlayer(3);
+        ClueComputer.setCurrentPlayer(4);
         ClueComputer.guessElims(2);
     }
 }
