@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'Guess.php';
 //setup form was entered, so (re)start the game
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['playerCount'])) {
     session_unset();
@@ -48,21 +49,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['suspect'])) {
         $sp = (int) $_POST['showPlayer'];
         if(isset($_POST['shownCard']) && !empty($_POST['shownCard'])){
             $sc = $_POST['shownCard'];
-            // echo "$sc was shown<br>";
             eliminateHorizontally(getRow($sc), $sp);
         }
-        // $thisGuess = new Guess($s, $w, $r, 2);
-        // $_SESSION['Guesses'][] = $thisGuess;
+        $thisGuess = new Guess($s, $w, $r, $sp);
+        $_SESSION['Guesses'][] = $thisGuess;
+        guessElims($p, $sp, $thisGuess);
+        //checkTable()
         header("Location: game.php");
         exit;
         // echo "$p guessed $s with $w in $r and $sp showed a card.";
     } catch(Exception $e){
         echo $e;
     }
-    
 }
 
 
+function checkTable(){
+
+}
+
+//runs currentGuessElim for each player that said they didn't have any of the cards in Guess
+function guessElims($currentPlayer, $showPlayer, $guess){
+    for($i = $currentPlayer+1; $i != $showPlayer; $i++){
+        if($i== count($_SESSION['players'])+1){ $i=0;}
+        else if($i==$currentPlayer){break;}
+        else {currentGuessElim($i, $guess);};
+    }
+}
+
+//eliminates all 3 values in 1 guess from a player, if they said they didn't have any of these cards
+function currentGuessElim($col, $guess){
+    $_SESSION['table'][getRow($guess->getSuspect())][$col] = 'X';
+    $_SESSION['table'][getRow($guess->getWeapon())][$col] = 'X';
+    $_SESSION['table'][getRow($guess->getRoom())][$col] = 'X';
+}
 
 function eliminateHorizontally($row, $col){
     for ($i = 0; $i < count($_SESSION['table'][$row]); $i++) {
