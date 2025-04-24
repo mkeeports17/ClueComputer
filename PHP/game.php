@@ -51,7 +51,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['clear'])){
         </div>
         <input class="button-74" type="submit" value="Submit">
     </form>
-    <br><br><a href="setup.php">
+    <br><br><a href="index.php">
     <button class="button-74">Setup Page</button></a>
     <br>
     </div>
@@ -113,7 +113,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['clear'])){
 
 
     <div class="right" style="flex: 2;">
-    <h1>Master Table</h1>
     <table border="1">
         <thead>
         <tr>

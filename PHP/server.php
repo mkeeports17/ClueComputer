@@ -1,6 +1,9 @@
 <?php
 session_start();
 include 'Guess.php';
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 //setup form was entered, so (re)start the game
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['playerCount'])) {
     session_unset();
@@ -9,8 +12,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['playerCount'])) {
     $_SESSION['weapons'] = ['Wrench', 'Candlestick', 'Dagger', 'Pistol', 'Leadpipe', 'Rope'];
     $_SESSION['rooms'] = ['Bathroom', 'Office', 'Dining Room', 'Game Room', 'Garage', 'Bedroom', 'Living Room', 'Kitchen', 'Courtyard'];
     $_SESSION['fullList'] = array_merge($_SESSION['suspects'], $_SESSION['weapons'], $_SESSION['rooms']);
-    //$_SESSION['fullList'] = ['Green', 'Mustard', 'Peacock', 'Plum', 'Scarlet', 'White', 'Wrench', 'Candlestick', 'Dagger', 'Pistol', 
-    //'Leadpipe', 'Rope', 'Bathroom', 'Office', 'Dining Room', 'Game Room', 'Garage', 'Bedroom', 'Living Room', 'Kitchen', 'Courtyard'];
 
     $playerCount = htmlspecialchars($_POST['playerCount']);
     for ($i = 1; $i <= $playerCount; $i++) {
@@ -25,18 +26,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['playerCount'])) {
     if(isset($_POST['card5'])){ $playerCards[] = htmlspecialchars($_POST['card5']); }
     if(isset($_POST['card6'])){ $playerCards[] = htmlspecialchars($_POST['card6']); }
     $_SESSION['playerCards'] = $playerCards;
-    $_SESSION['table'] = [['-','X','-','-','-','-','-'], ['-', 'X','-','-','-','-','-'], ['-', 'X','-','-','-','-','-'], 
-    ['-', 'X','-','-','-','-','-'], ['-', 'X','-','-','-','-','-'], ['-', 'X','-','-','-','-','-'], ['-', 'X','-','-','-','-','-'], 
-    ['-', 'X','-','-','-','-','-'], ['-', 'X','-','-','-','-','-'], ['-', 'X','-','-','-','-','-'], ['-', 'X','-','-','-','-','-'], 
-    ['-', 'X','-','-','-','-','-'], ['-', 'X','-','-','-','-','-'], ['-', 'X','-','-','-','-','-'], ['-', 'X','-','-','-','-','-'], 
-    ['-', 'X','-','-','-','-','-'], ['-', 'X','-','-','-','-','-'], ['-', 'X','-','-','-','-','-'], ['-', 'X','-','-','-','-','-'], 
-    ['-', 'X','-','-','-','-','-'], ['-', 'X','-','-','-','-','-']];
+    
+
+    // $_SESSION['table'] = [['-','X','-','-','-','-','-'], ['-', 'X','-','-','-','-','-'], ['-', 'X','-','-','-','-','-'], 
+    // ['-', 'X','-','-','-','-','-'], ['-', 'X','-','-','-','-','-'], ['-', 'X','-','-','-','-','-'], ['-', 'X','-','-','-','-','-'], 
+    // ['-', 'X','-','-','-','-','-'], ['-', 'X','-','-','-','-','-'], ['-', 'X','-','-','-','-','-'], ['-', 'X','-','-','-','-','-'], 
+    // ['-', 'X','-','-','-','-','-'], ['-', 'X','-','-','-','-','-'], ['-', 'X','-','-','-','-','-'], ['-', 'X','-','-','-','-','-'], 
+    // ['-', 'X','-','-','-','-','-'], ['-', 'X','-','-','-','-','-'], ['-', 'X','-','-','-','-','-'], ['-', 'X','-','-','-','-','-'], 
+    // ['-', 'X','-','-','-','-','-'], ['-', 'X','-','-','-','-','-']];
+    $_SESSION['table'] = [['-','X','-','-','-'], ['-', 'X','-','-','-'], ['-', 'X','-','-','-'], 
+    ['-', 'X','-','-','-'], ['-', 'X','-','-','-'], ['-', 'X','-','-','-'], ['-', 'X','-','-','-'], 
+    ['-', 'X','-','-','-'], ['-', 'X','-','-','-'], ['-', 'X','-','-','-'], ['-', 'X','-','-','-'], 
+    ['-', 'X','-','-','-'], ['-', 'X','-','-','-'], ['-', 'X','-','-','-'], ['-', 'X','-','-','-'], 
+    ['-', 'X','-','-','-'], ['-', 'X','-','-','-'], ['-', 'X','-','-','-'], ['-', 'X','-','-','-'], 
+    ['-', 'X','-','-','-'], ['-', 'X','-','-','-']];
+    for($i=0; $i<count($_SESSION['fullList']), $i++;){
+        $_SESSION['table'][$i] = [];
+        $_SESSION['table'][$i][0] = '-';
+        $_SESSION['table'][$i][1] = 'X';
+        
+        for($j=2; $j<=count($_SESSION['players']), $j++;){
+            $_SESSION['table'][$i][] = '-';
+        }
+        // }catch(Exception $e){ $_SESSION['table'] = [['E','X','E','E','E','E','E'], ['E','X','E','E','E','E','E'], ['E','X','E','E','E','E','E'], 
+        //     ['E','X','E','E','E','E','E'], ['E','X','E','E','E','E','E'], ['E','X','E','E','E','E','E'], ['E','X','E','E','E','E','E'], 
+        //     ['E','X','E','E','E','E','E'], ['E','X','E','E','E','E','E'], ['E','X','E','E','E','E','E'], ['E','X','E','E','E','E','E'], 
+        //     ['E','X','E','E','E','E','E'], ['E','X','E','E','E','E','E'], ['E','X','E','E','E','E','E'], ['E','X','E','E','E','E','E'], 
+        //     ['E','X','E','E','E','E','E'], ['E','X','E','E','E','E','E'], ['E','X','E','E','E','E','E'], ['E','X','E','E','E','E','E'], 
+        //     ['E','X','E','E','E','E','E'], ['E','X','E','E','E','E','E']];
+        // }
+    }
     foreach($playerCards as $pc){
         eliminateHorizontally(getRow($pc),1);
     }
 
-    header("Location: game.php");
-    exit;
+    foreach($_SESSION['table'] as $row){
+        foreach($row as $cell){
+            echo $cell . " ";
+        }
+        echo "<br>";
+    }
+    // header("Location: game.php");
+    // exit;
 }
 
 //next guess was entered
@@ -54,17 +85,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['suspect'])) {
         $thisGuess = new Guess($s, $w, $r, $sp);
         $_SESSION['Guesses'][] = $thisGuess;
         guessElims($p, $sp, $thisGuess);
-        //checkTable()
+        checkTable();
+        checkGuesses();
         header("Location: game.php");
         exit;
-        // echo "$p guessed $s with $w in $r and $sp showed a card.";
     } catch(Exception $e){
         echo $e;
     }
 }
 
 
+//puts an O in any column where there are all X's
 function checkTable(){
+    //check one row at a time
+    for($i=0; $i<count($_SESSION['table']); $i++){
+        $allX = true;
+        for($j=1; $j<count($_SESSION['table'][$i]); $j++){
+            if($_SESSION['table'][$i][$j] != 'X'){
+                $allX = false;
+                break;
+            }
+        } if($allX){
+            $_SESSION['table'][$i][0] = 'O';
+        }
+    }
+}
+
+function checkGuesses(){
 
 }
 
