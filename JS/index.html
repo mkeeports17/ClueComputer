@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clue Computer - Setup</title>
+  <style>
+    html, body {
+      margin: 10;
+      padding: 10;
+      height: 100%;
+      font-family:Arial, Helvetica, sans-serif;
+    }
+    .container {
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+    }
+    .left, .right {
+      flex: 1;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .left {
+      background-color: #deae69;
+      border-right: 2px solid black;
+    }
+    .right {
+      background-color: #deae69;
+    }
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    th, td{
+        padding: 20px 10px;
+        text-align:center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div>
+      <h1>Welcome to Clue Computer!</h1>
+      <p>I am a computer designed to calculate the logic behind the game of Clue. Tell me each guess made
+          in the game (by you and your opponents) and I will crack the case for you as quickly as possible.</p>
+      <h2>Enter setup data before the game begins:</h2><br>
+      
+      <!-- This form's submission is now handled by logic.js -->
+      <form id="clueForm">
+          <label>How many players are there? <input type="number" name="playerCount" id="playerCountInput" min="2" max="6" required></label><br><br>
+          <label>How many cards do you have? <input type="number" id="cardCount" min="1"></label><br><br>
+          <div id="cardInputs"></div>
+          <input type="submit" value="Start Game">
+      </form>
+      <br>
+    </div>
+  </div>
+
+  <!-- 
+    SCRIPTS
+    - Guess.js: Defines the Guess class structure.
+    - setup.js: Handles the UI interactions specific to THIS page.
+    - logic.js: Handles the form submission logic for the entire application.
+  -->
+  <script src="Guess.js"></script>
+  <script src="setup.js"></script>
+  <script src="logic.js"></script>
+</body>
+</html>
