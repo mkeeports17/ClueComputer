@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['playerCount'])) {
         // }
     }
     foreach($playerCards as $pc){
-        eliminateHorizontally(getRow($pc),1);
+        eliminateHorizontally(getRow($pc), 1);
     }
 
     // foreach($_SESSION['table'] as $row){
@@ -87,6 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['suspect'])) {
         guessElims($p, $sp, $thisGuess);
         checkTable();
         checkGuesses();
+         
         header("Location: game.php");
         exit;
     } catch(Exception $e){
@@ -95,7 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['suspect'])) {
 }
 
 
-//puts an O in any column where there are all X's
+//puts an O in Envelope column for rows where there are all X's
 function checkTable(){
     //check one row at a time
     for($i=0; $i<count($_SESSION['table']); $i++){
@@ -111,9 +112,14 @@ function checkTable(){
     }
 }
 
+
+// Check previous guesses to see if any can be eliminated.
+// For example, if a the player that showed one of 3 cards just said they didn't have two of them 
+// in the last turn then we can back track and conclude that they have the 3rd card in that guess' card trio
 function checkGuesses(){
 
 }
+
 
 //runs currentGuessElim for each player that said they didn't have any of the cards in Guess
 function guessElims($currentPlayer, $showPlayer, $guess){
@@ -124,19 +130,23 @@ function guessElims($currentPlayer, $showPlayer, $guess){
     }
 }
 
-//eliminates all 3 values in 1 guess from a player, if they said they didn't have any of these cards
+// Eliminates all 3 values in 1 guess from a player, if they said they didn't have any of these cards
 function currentGuessElim($col, $guess){
     $_SESSION['table'][getRow($guess->getSuspect())][$col] = 'X';
     $_SESSION['table'][getRow($guess->getWeapon())][$col] = 'X';
     $_SESSION['table'][getRow($guess->getRoom())][$col] = 'X';
 }
 
+// Signify in the table that the player in $col has the card in $row
+// Mark that cell O and the other cells in that card's row X
 function eliminateHorizontally($row, $col){
     for ($i = 0; $i < count($_SESSION['table'][$row]); $i++) {
         $_SESSION['table'][$row][$i] = 'X';
     }
     $_SESSION['table'][$row][$col] = 'O';
 }
+
+// Returns the row index number where that card is located in the table
 function getRow($card){
     return (array_search($card, $_SESSION['fullList']));
 }
