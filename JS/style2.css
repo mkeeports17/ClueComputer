@@ -1,0 +1,223 @@
+/* ==========================================================================
+   Clue Computer - Modern & Responsive Stylesheet
+   ========================================================================== */
+
+/* --- Google Fonts Import --- */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto+Slab:wght@400;700&display=swap');
+
+/* --- CSS Variables (Root) for Theming --- */
+:root {
+    --background-dark: #2c3e50;
+    --background-light: #34495e;
+    --primary-text: #ecf0f1;
+    --accent-color: #e67e22;
+    --accent-hover: #d35400;
+    --border-color: #95a5a6;
+    --table-header-bg: #22303f;
+    --table-row-odd-bg: #3a5067;
+    --table-row-even-bg: #415872;
+    --shadow-color: rgba(0, 0, 0, 0.4);
+
+    --font-heading: 'Roboto Slab', serif;
+    --font-body: 'Lato', sans-serif;
+}
+
+/* --- General Body & HTML Styling --- */
+html {
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: var(--font-body);
+    background-color: var(--background-dark);
+    color: var(--primary-text);
+    line-height: 1.6;
+}
+
+h1, h2 {
+    font-family: var(--font-heading);
+    color: var(--accent-color);
+    text-shadow: 1px 1px 2px var(--shadow-color);
+}
+
+p {
+    max-width: 65ch; /* Improves readability */
+}
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+/* --- Main Layout Container --- */
+.container {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    flex-direction: row; /* Default for larger screens */
+}
+
+.left, .right {
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.left {
+    flex: 1;
+    background-color: var(--background-light);
+    border-right: 2px solid var(--background-dark);
+    min-width: 320px; /* Prevents left panel from getting too squished */
+}
+
+.right {
+    flex: 2;
+    background-color: var(--background-dark);
+    overflow-y: auto; /* Allow right side to scroll if table is large */
+}
+
+/* --- Forms & Input Styling --- */
+.formbox, #clueForm {
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--background-dark);
+    box-shadow: 0 4px 15px var(--shadow-color);
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+input[type="number"],
+select {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+    background-color: var(--background-light);
+    color: var(--primary-text);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="number"]:focus,
+select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 5px var(--accent-color);
+}
+
+/* --- Button Styling --- */
+.button-74, input[type="submit"] {
+    background-color: var(--accent-color);
+    border: 2px solid var(--accent-hover);
+    border-radius: 30px;
+    box-shadow: var(--accent-hover) 4px 4px 0 0;
+    color: var(--primary-text);
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0 1.5rem;
+    line-height: 50px;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    touch-action: manipulation;
+    transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.button-74:hover, input[type="submit"]:hover {
+    background-color: var(--accent-hover);
+}
+
+.button-74:active, input[type="submit"]:active {
+    box-shadow: var(--accent-hover) 2px 2px 0 0;
+    transform: translate(2px, 2px);
+}
+
+#setupLink {
+    margin-top: 1rem;
+    display: inline-block;
+}
+
+/* --- Results Table Styling --- */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    box-shadow: 0 5px 20px var(--shadow-color);
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+
+thead th {
+    background-color: var(--table-header-bg);
+    color: var(--accent-color);
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+}
+
+tbody tr {
+    transition: background-color 0.3s ease;
+}
+
+tbody tr:nth-of-type(odd) {
+    background-color: var(--table-row-odd-bg);
+}
+
+tbody tr:nth-of-type(even) {
+    background-color: var(--table-row-even-bg);
+}
+
+tbody tr:hover {
+    background-color: var(--accent-color);
+    color: var(--background-dark);
+}
+
+tbody th {
+    font-weight: bold;
+    text-align: left;
+}
+
+/* ==========================================================================
+   Responsive Design - Media Queries
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Stack left and right panels vertically */
+    }
+
+    .left {
+        border-right: none;
+        border-bottom: 2px solid var(--background-dark);
+    }
+
+    .right {
+        flex-basis: auto; /* Allow right panel to grow as needed */
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .formbox, #clueForm {
+        padding: 1rem;
+    }
+}

@@ -1,70 +1,192 @@
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family:Arial, Helvetica, sans-serif;
-  }
-  .container {
-    display: flex;         /* horizontal layout */
-    height: 100vh;         /* full viewport height */
-    width: 100vw;          /* full viewport width */
-  }
-  .left, .right {
-    flex: 1;               /* split evenly */
-    padding: 20px;
-    box-sizing: border-box;
-  }
-  .left {
-    background-color: #deae69;
-    border-right: 2px solid black;
-  }
-  .right {
-    background-color: #deae69;
-    overflow-y:auto;
-  }
-  #extraField {
-      display: none;
-  }
-  table {
-      border-collapse: collapse;
-      width: 100%;
-  }
-  th, td{
-      padding: 10px 10px;
-      text-align:center;
-  }
-  .button-74 {
-  background-color: #fbeee0;
-  border: 2px solid #422800;
-  border-radius: 30px;
-  box-shadow: #422800 4px 4px 0 0;
-  color: #422800;
-  cursor: pointer;
-  display: inline-block;
+/* ====== Global Reset ====== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* ====== Page Background ====== */
+body {
+  background: linear-gradient(135deg, #f0f4f9, #d9e4ec);
+  color: #222;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem;
+}
+
+.container {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  padding: 1.25rem;
+  width: 100%;
+  max-width: 1400px;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+/* ====== Headings ====== */
+h1 {
+  font-size: 2rem;
+  color: #2a4d69;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 1.25rem;
+  color: #4b86b4;
+  margin-top: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+/* ====== Paragraphs ====== */
+p {
+  margin-bottom: 1.25rem;
+  line-height: 1.5;
+  color: #444;
+}
+
+/* ====== Forms ====== */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: -0.1rem;
+}
+
+label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #333;
+}
+
+input, select {
+  margin-top: 0.35rem;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus, select:focus {
+  border-color: #4b86b4;
+  box-shadow: 0 0 0 2px rgba(75,134,180,0.2);
+  outline: none;
+}
+
+/* ====== Buttons ====== */
+.button-74,
+input[type="submit"] {
+  appearance: none;
+  background: #4b86b4;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
   font-weight: 600;
-  font-size: 18px;
-  padding: 0 18px;
-  line-height: 50px;
-  text-align: center;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  }
-  .button-74:hover {
-  background-color: #fff;
-  }
-  .button-74:active {
-  box-shadow: #422800 2px 2px 0 0;
-  transform: translate(2px, 2px);
-  }
-  @media (min-width: 768px) {
-  .button-74 {
-      min-width: 120px;
-      padding: 0 25px;
+  cursor: pointer;
+  transition: background 0.25s, transform 0.1s;
+}
+
+.button-74:hover,
+input[type="submit"]:hover {
+  background: #3a6a91;
+}
+
+.button-74:active,
+input[type="submit"]:active {
+  transform: scale(0.97);
+}
+
+/* ====== Table Styling ====== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fdfdfd;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+
+  /* new border */
+  border: 2px solid #ccd6e0;
+}
+
+thead {
+  background: #2a4d69;
+  color: #fff;
+}
+
+thead th {
+  padding: 0.75rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+tbody td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #eee;
+  font-size: 0.9rem;
+}
+
+tbody tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+/* ====== Responsive Adjustments ====== */
+.left, .right {
+  flex: 1 1 300px;
+  min-width: 280px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    padding: 1.5rem;
   }
 }
-.formbox{
-    padding:20px;
-    border:2px solid black;
+
+
+/* ====== Responsive Tweaks for Mobile ====== */
+@media (max-width: 600px) {
+  body {
+    padding: 1rem; /* less edge padding on small screens */
+  }
+
+  .container {
+    padding: 1rem;
+    gap: 1rem;
+    max-width: 100%; /* allow full width on mobile */
+  }
+
+  h1 {
+    font-size: 1.5rem; /* slightly smaller */
+  }
+
+  h2 {
+    font-size: 1.1rem;
+  }
+
+  input, select {
+    font-size: 0.9rem; /* slightly smaller so they fit better */
+    padding: 0.5rem 0.7rem;
+  }
+
+  .button-74,
+  input[type="submit"] {
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+  }
+
+  table {
+    font-size: 0.8rem; /* keep table readable on small screens */
+    display: block;
+    overflow-x: auto;  /* horizontal scroll if table is wider than screen */
+  }
 }
+
